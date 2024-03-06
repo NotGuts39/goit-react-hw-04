@@ -18,6 +18,10 @@ const App = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
+     if (searchQuery === '') {
+      return;
+    }
+    
     async function getData() {
       try {
         setIsLoading(true);
