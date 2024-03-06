@@ -1,0 +1,30 @@
+.searchBarContainer {
+  display: flex;
+  justify-content: center;
+
+  background-color: rgb(0, 204, 255);
+}
+
+.searchInput {
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #4fa94d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}

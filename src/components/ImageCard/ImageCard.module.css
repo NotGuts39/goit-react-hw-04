@@ -1,0 +1,10 @@
+.imageCard {
+  height: 400px;
+  width: 450px;
+}
+
+.image {
+  width: calc(25% - 10px);
+
+  object-fit: cover;
+}

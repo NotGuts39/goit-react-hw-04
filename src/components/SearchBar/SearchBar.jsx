@@ -1,6 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Toaster, toast } from 'react-hot-toast';
+import css from './SearchBar.module.css';
+
 
 const SearchBar = ({ onSearch }) => {
   const SearchFormSchema = Yup.object().shape({
@@ -17,11 +19,9 @@ const SearchBar = ({ onSearch }) => {
     actions.resetForm();
   };
 
-  return (
-    <header>
-      <Toaster
-  position="top-right"
-  reverseOrder={false} />
+   return (
+    <header className={css.searchBarContainer}>
+      <Toaster position="top-right" reverseOrder={false} />
       <Formik
         initialValues={{ query: '' }}
         onSubmit={handleSubmit}
@@ -34,9 +34,10 @@ const SearchBar = ({ onSearch }) => {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
+            className={css.searchInput}
           />
-          <ErrorMessage name="query" component="div" />
-          <button type="submit">Search</button>
+          <ErrorMessage name="query" component="div" className={css.errorMessage} />
+          <button type="submit" className={css.searchButton}>Search</button>
         </Form>
       </Formik>
     </header>

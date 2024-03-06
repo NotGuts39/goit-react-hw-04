@@ -1,7 +1,9 @@
+import css from './ImageCard.module.css';
+
 const ImageCard = ({ imageUrl, altText }) => {
   return (
-    <div>
-      <img src={imageUrl} alt={altText} />
+    <div className={css.imageCard}>
+      <img src={imageUrl} alt={altText} className={css.image} />
     </div>
   );
 };
