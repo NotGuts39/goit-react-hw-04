@@ -24,8 +24,7 @@ const ImageModal = ({
       border: 0,
       backgroundColor: 0,
       padding: 0,
-      maxWidth: '90%', 
-      maxHeight: '90%',
+      
      overflow: 'hidden',
       
       
@@ -40,7 +39,9 @@ const ImageModal = ({
       contentLabel="Image Modal"
       style={customStyles}
     >
-      <img src={imageUrl} alt={imageAlt} />
+      <img src={imageUrl} alt={imageAlt} style={{
+                maxHeight: 900, 
+                  }} />
     </Modal>
   );
 };

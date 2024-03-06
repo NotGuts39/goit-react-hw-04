@@ -16,18 +16,25 @@ const App = () => {
   const [error, setError] = useState(null);
   const [hasMoreImages, setHasMoreImages] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [noResults, setNoResults] = useState(false); 
+  
   useEffect(() => {
-     if (searchQuery === '') {
+    if (searchQuery === '') {
       return;
     }
-    
+
     async function getData() {
       try {
         setIsLoading(true);
         const data = await fetchImages(searchQuery, page);
-        setImages(prevImages => [...prevImages, ...data]);
-        setHasMoreImages(data.length > 0);
+        if (data.length === 0 && page === 1) {
+          
+          setNoResults(true);
+        } else {
+          
+          setImages(prevImages => [...prevImages, ...data]);
+          setHasMoreImages(data.length > 0);
+        }
       } catch (error) {
         console.error('Error fetching images:', error);
         setError('Failed to fetch images');
@@ -46,6 +53,7 @@ const App = () => {
     setIsLoading(true);
     setError(null);
     setSelectedImage(null);
+    setNoResults(false);
   };
 
   const handleLoadMore = () => {
@@ -64,20 +72,23 @@ const App = () => {
     <div>
       <SearchBar onSearch={handleSearch} />
       {error ?
-      <ErrorMessage message={error} /> :
-      <ImageGallery images={images} openModal={openModal} />}
+        <ErrorMessage message={error} /> :
+        noResults ?
+          <ErrorMessage message="No results found." /> :
+          <ImageGallery images={images} openModal={openModal} />
+      }
       {isLoading && <Loader />}
-      {hasMoreImages && <LoadMoreBtn onLoadMore={handleLoadMore} hasMoreImages={hasMoreImages} />}
-      {selectedImage && 
-      <ImageModal
-        isOpen={selectedImage !== null}
-        onRequestClose={closeModal}
-        imageUrl={selectedImage.urls.regular}
-        imageAlt={selectedImage.alt}
-      />
-}
+      {hasMoreImages && !noResults && <LoadMoreBtn onLoadMore={handleLoadMore} hasMoreImages={hasMoreImages} />}
+      {selectedImage &&
+        <ImageModal
+          isOpen={selectedImage !== null}
+          onRequestClose={closeModal}
+          imageUrl={selectedImage.urls.regular}
+          imageAlt={selectedImage.alt}
+        />
+      }
     </div>
   );
 }
 
-export default App
+export default App;
