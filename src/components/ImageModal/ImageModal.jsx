@@ -5,9 +5,8 @@ Modal.setAppElement('#root');
 const ImageModal = ({
   isOpen,
   onRequestClose,
-  imageUrl,
-  imageAlt
-  
+  imageUrl = '',
+  imageAlt = ''
 }) => {
   const customStyles = {
     overlay: {
@@ -24,11 +23,7 @@ const ImageModal = ({
       border: 0,
       backgroundColor: 0,
       padding: 0,
-      
-     overflow: 'hidden',
-      
-      
-      
+      overflow: 'hidden',
     },
   };
 
@@ -39,9 +34,7 @@ const ImageModal = ({
       contentLabel="Image Modal"
       style={customStyles}
     >
-      <img src={imageUrl} alt={imageAlt} style={{
-                maxHeight: 900, 
-                  }} />
+      <img src={imageUrl} alt={imageAlt} style={{ maxHeight: 900 }} />
     </Modal>
   );
 };
